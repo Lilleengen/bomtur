@@ -40,39 +40,27 @@ export function Settings({settings, setSettings}) {
       <Text>Stop 1</Text>
       <Button icon="bus-stop" mode="contained" onPress={() => {
         setShowStopSearch1(true);
-        if (settingsFields[0]) {
-          setSettingsFields({
-            ...settingsFields,
-            stops: removeElemFromArr(settingsFields.stops, settingsFields[0])
-          });
-        }
       }}>
         {settingsFields.stops[0] ? settingsFields.stops[0].name : 'Add'}
       </Button>
       <StopSearch visible={showStopSearch1} onSelect={(stop) => {
         setSettingsFields({
           ...settingsFields,
-          stops: [stop, ...settingsFields.stops]
+          stops: settingsFields.stops[1] ? [stop, settingsFields.stops[1]] : [stop]
         });
         setShowStopSearch1(false);
       }} />
       <Text>Stop 2</Text>
       <Button icon="bus-stop" mode="contained" onPress={() => {
         setShowStopSearch2(true);
-        if (settingsFields[1]) {
-          setSettingsFields({
-            ...settingsFields,
-            stops: removeElemFromArr(settingsFields.stops, settingsFields[1])
-          });
-        }
       }}>
-        {settingsFields.stops[1]? settingsFields.stops[1].name : 'Add'}
+        {settingsFields.stops[1] ? settingsFields.stops[1].name : 'Add'}
       </Button>
       <StopSearch visible={showStopSearch2} onSelect={(stop) => {
         setShowStopSearch2(false);
         setSettingsFields({
           ...settingsFields,
-          stops: [...settingsFields.stops, stop]
+          stops: settingsFields.stops[0] ? [settingsFields.stops[0], stop] : [stop]
         })
       }} />
       <Button onPress={() => {
