@@ -5,7 +5,7 @@ import {
 import { useState, useEffect } from 'react';
 import {msToS, sToMAndS} from "../utils";
 
-const calculate = (date, direction) => {
+export const calculate = (date, direction) => {
   if (direction === 'up') {
     return new Date() - (new Date(date));
   }

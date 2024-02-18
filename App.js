@@ -1,3 +1,4 @@
+import { View } from "react-native";
 import {SettingsContextWrapper} from "./containers/SettingsContext";
 import {ApiContextWrapper} from "./containers/ApiContext";
 import {LoadedApp} from "./components/LoadedApp";

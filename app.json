@@ -14,18 +14,17 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "ios": {
-      "supportsTablet": true
-    },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "io.lilleengen.bomtur"
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
+      "package": "io.lilleengen.bomtur",
+      "permissions": [
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.FOREGROUND_SERVICE"
+      ]
     },
     "plugins": [
       "expo-secure-store",
@@ -35,6 +34,9 @@
       "eas": {
         "projectId": "cef7596e-7fd9-4814-966c-08b6bb50a58e"
       }
+    },
+    "ios": {
+      "bundleIdentifier": "io.lilleengen.bomtur"
     }
   }
 }

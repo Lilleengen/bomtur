@@ -10,12 +10,12 @@ export function LoadedApp() {
   const {showSettings} = useSettingsContext();
   const {fetch, data} = useApiContext();
   return (
-    <View>
+    <View style={{flex: 1}}>
       <Appbar.Header>
         <Appbar.Content title={`Avganger fra ${data.stop}`} />
         <Appbar.Action icon="cog" onPress={showSettings} />
       </Appbar.Header>
-      <TouchableRipple onPress={fetch}>
+      <TouchableRipple style={{flex: 1}} onPress={fetch}>
         <Quays />
       </TouchableRipple>
     </View>

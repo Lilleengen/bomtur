@@ -2,23 +2,33 @@ import {
   View,
 } from 'react-native';
 import {useApiContext} from "../containers/ApiContext";
-import {Counter} from "./Counter";
-import {getQuaysFromCalls} from "../utils";
+import {calculate} from "./Counter";
+import {getQuaysFromCalls, msToS, sToMAndS} from "../utils";
 import {Quay} from "./Quay";
 import {Divider, Text, Card} from "react-native-paper";
-import {Fragment} from "react";
+import {Fragment, useEffect, useState} from "react";
+import { NativeCardView } from '../modules/native-card';
 
 export function Quays() {
   const {data} = useApiContext();
   const quays = getQuaysFromCalls(data.calls);
   
+  const [counter, setCounter] = useState(calculate(data.lastUpdated, 'up'));
+
+  useEffect(() => {
+    setCounter(calculate(data.lastUpdated, 'up'));
+    const intervalId = setInterval(() => {
+      setCounter(calculate(data.lastUpdated, 'up'));
+      }, 1000);
+
+    return () => clearInterval(intervalId);
+    }, [data.lastUpdated]);
+
   return (
-    <View>
-      <Card style={{margin: 10}}>
-        <Card.Content>
-          <Text variant="labelLarge">Oppdatert <Counter date={data.lastUpdated} direction="up" textVariant="labelLarge"/> siden</Text>
-        </Card.Content>
-      </Card>
+    <View style={{flex: 1}}>
+      <View style={{flex: 1, margin: 10, minHeight: 50}}>
+        <NativeCardView style={{flex: 1}} text={`Oppdatert for ${sToMAndS(msToS(counter))} siden`} />
+      </View>
       {quays.map(quay => <Fragment key={`${quay.id}-top`}>
         <Divider />
         <Quay key={quay.id} quay={quay} calls={data.calls} />
